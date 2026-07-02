@@ -12,9 +12,20 @@
   "engines": {
     "vscode": "^1.80.0"
   },
-  "categories": ["Linters"],
-  "keywords": ["sarif", "security", "sast", "semgrep", "gitleaks", "grype"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Linters"
+  ],
+  "keywords": [
+    "sarif",
+    "security",
+    "sast",
+    "semgrep",
+    "gitleaks",
+    "grype"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -38,12 +49,13 @@
     "compile": "tsc -p ./",
     "watch": "tsc --watch -p ./",
     "test": "mocha --require ts-node/register src/test/**/*.test.ts",
-    "package": "vsce package"
+    "package": "node --require ./scripts/file-polyfill.js ./node_modules/@vscode/vsce/out/main.js package --no-dependencies"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.0",
     "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^2.32.0",
     "mocha": "^10.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
