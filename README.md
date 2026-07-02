@@ -82,6 +82,10 @@ The extension picks up the new files automatically.
 
 See [CLAUDE.md](CLAUDE.md) for full design rationale.
 
+## Trying It Out
+
+A sample SARIF file with findings at all severity levels from multiple tools is included at [`fixtures/example.sarif`](fixtures/example.sarif). Copy it into your workspace's `.sarif/` directory to see the extension in action without running a real scanner.
+
 ## License
 
 MIT

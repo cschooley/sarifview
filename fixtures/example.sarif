@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": { "driver": { "name": "semgrep" } },
+      "results": [
+        {
+          "ruleId": "python.jwt.security.unverified-jwt-decode",
+          "level": "error",
+          "message": { "text": "JWT decoded without signature verification — attacker can forge tokens." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/auth.py" }, "region": { "startLine": 10, "startColumn": 1 } } }]
+        },
+        {
+          "ruleId": "python.sqlalchemy.security.raw-query",
+          "level": "warning",
+          "message": { "text": "Raw SQL query with string interpolation may be vulnerable to injection." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/admin.py" }, "region": { "startLine": 5, "startColumn": 1 } } }]
+        },
+        {
+          "ruleId": "python.lang.security.insecure-hash",
+          "level": "note",
+          "message": { "text": "MD5 is cryptographically weak; use SHA-256 or better." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/productions.py" }, "region": { "startLine": 1, "startColumn": 1 } } }]
+        }
+      ]
+    },
+    {
+      "tool": { "driver": { "name": "gitleaks" } },
+      "results": [
+        {
+          "ruleId": "generic-api-key",
+          "level": "error",
+          "message": { "text": "Hardcoded API key detected in source — rotate immediately." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "docker-compose.yml" }, "region": { "startLine": 11, "startColumn": 7 } } }]
+        },
+        {
+          "ruleId": "github-pat",
+          "level": "warning",
+          "message": { "text": "Possible GitHub personal access token in commit history." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/requirements.txt" }, "region": { "startLine": 1, "startColumn": 1 } } }]
+        }
+      ]
+    }
+  ]
+}
