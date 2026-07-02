@@ -4,6 +4,8 @@ A VS Code / VSCodium extension that automatically populates the **Problems panel
 from `.sarif` files in your workspace — no clicking, no file pickers, no hidden-directory
 friction.
 
+![SARIF findings shown inline in the VS Code Problems panel](docs/screenshot.png)
+
 ## The Problem
 
 SARIF is the standard output format for security scanners (Semgrep, Gitleaks, Grype, etc.).
