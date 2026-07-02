@@ -1,0 +1,51 @@
+{
+  "name": "sarifview",
+  "displayName": "SARIF View",
+  "description": "Auto-populate the VS Code Problems panel from .sarif files in your workspace — no clicks required.",
+  "version": "0.1.0",
+  "publisher": "cschooley",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cschooley/sarifview"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Linters"],
+  "keywords": ["sarif", "security", "sast", "semgrep", "gitleaks", "grype"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "SARIF View",
+      "properties": {
+        "sarifview.directory": {
+          "type": "string",
+          "default": ".sarif",
+          "description": "Directory to scan for .sarif files, relative to the workspace root."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "sarifview.refresh",
+        "title": "SARIF View: Refresh"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc --watch -p ./",
+    "test": "mocha --require ts-node/register src/test/**/*.test.ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.80.0",
+    "mocha": "^10.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
