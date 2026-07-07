@@ -110,7 +110,10 @@ export function parseSarif(content: string, workspaceRoot: string): Finding[] {
 
 function resolveUri(rawUri: string, workspaceRoot: string): string | null {
     if (rawUri.startsWith('file://')) return rawUri;
-    // Treat as relative path from workspace root
-    const abs = path.resolve(workspaceRoot, rawUri);
+    // Treat as relative path from workspace root, rejecting anything that
+    // escapes it (e.g. a SARIF file with `../../etc/passwd` as a uri)
+    const root = path.resolve(workspaceRoot);
+    const abs = path.resolve(root, rawUri);
+    if (abs !== root && !abs.startsWith(root + path.sep)) return null;
     return 'file://' + abs;
 }

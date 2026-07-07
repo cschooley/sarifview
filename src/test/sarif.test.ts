@@ -153,4 +153,13 @@ describe('parseSarif', () => {
     it('throws on invalid JSON', () => {
         assert.throws(() => parseSarif('not json', WORKSPACE));
     });
+
+    it('skips relative paths that escape the workspace root', () => {
+        const findings = parseSarif(sarif([{
+            message: { text: 'msg' },
+            ...location('../../etc/passwd'),
+        }]), WORKSPACE);
+
+        assert.deepStrictEqual(findings, []);
+    });
 });
