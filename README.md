@@ -84,7 +84,13 @@ See [CLAUDE.md](CLAUDE.md) for full design rationale.
 
 ## Trying It Out
 
-A sample SARIF file with findings at all severity levels from multiple tools is included at [`fixtures/example.sarif`](fixtures/example.sarif). Copy it into your workspace's `.sarif/` directory to see the extension in action without running a real scanner.
+A sample SARIF file with findings at all severity levels from multiple tools is included at [`fixtures/example.sarif`](fixtures/example.sarif), along with a matching dummy source file at [`fixtures/example-target.py`](fixtures/example-target.py) so you can also try jumping from a Problem to its file and line.
+
+1. Copy `fixtures/example.sarif` into your workspace's `.sarif/` directory.
+2. Copy `fixtures/example-target.py` into your workspace root.
+3. Findings appear in the Problems panel — click one to jump straight to the corresponding line.
+
+All findings in this fixture are clearly labeled sample data, not real issues.
 
 ## License
 

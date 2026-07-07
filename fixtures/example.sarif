@@ -6,22 +6,22 @@
       "tool": { "driver": { "name": "semgrep" } },
       "results": [
         {
-          "ruleId": "python.jwt.security.unverified-jwt-decode",
+          "ruleId": "sarifview.example.jwt-example",
           "level": "error",
-          "message": { "text": "JWT decoded without signature verification — attacker can forge tokens." },
-          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/auth.py" }, "region": { "startLine": 10, "startColumn": 1 } } }]
+          "message": { "text": "[sarifview sample data — not a real finding] Example of how an 'error' severity result from semgrep would appear, e.g. a JWT decoded without signature verification." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "example-target.py" }, "region": { "startLine": 8, "startColumn": 1 } } }]
         },
         {
-          "ruleId": "python.sqlalchemy.security.raw-query",
+          "ruleId": "sarifview.example.raw-query-example",
           "level": "warning",
-          "message": { "text": "Raw SQL query with string interpolation may be vulnerable to injection." },
-          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/admin.py" }, "region": { "startLine": 5, "startColumn": 1 } } }]
+          "message": { "text": "[sarifview sample data — not a real finding] Example of a 'warning' severity result, e.g. a raw SQL query built with string interpolation." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "example-target.py" }, "region": { "startLine": 12, "startColumn": 1 } } }]
         },
         {
-          "ruleId": "python.lang.security.insecure-hash",
+          "ruleId": "sarifview.example.weak-hash-example",
           "level": "note",
-          "message": { "text": "MD5 is cryptographically weak; use SHA-256 or better." },
-          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/app/routes/productions.py" }, "region": { "startLine": 1, "startColumn": 1 } } }]
+          "message": { "text": "[sarifview sample data — not a real finding] Example of a 'note' severity result, e.g. a suggestion to use a stronger hash algorithm." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "example-target.py" }, "region": { "startLine": 16, "startColumn": 1 } } }]
         }
       ]
     },
@@ -29,16 +29,16 @@
       "tool": { "driver": { "name": "gitleaks" } },
       "results": [
         {
-          "ruleId": "generic-api-key",
+          "ruleId": "sarifview.example.api-key-example",
           "level": "error",
-          "message": { "text": "Hardcoded API key detected in source — rotate immediately." },
-          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "docker-compose.yml" }, "region": { "startLine": 11, "startColumn": 7 } } }]
+          "message": { "text": "[sarifview sample data — not a real finding] Example of how gitleaks would flag a hardcoded API key." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "example-target.py" }, "region": { "startLine": 20, "startColumn": 16 } } }]
         },
         {
-          "ruleId": "github-pat",
+          "ruleId": "sarifview.example.token-example",
           "level": "warning",
-          "message": { "text": "Possible GitHub personal access token in commit history." },
-          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "backend/requirements.txt" }, "region": { "startLine": 1, "startColumn": 1 } } }]
+          "message": { "text": "[sarifview sample data — not a real finding] Example of how gitleaks would flag a possible access token." },
+          "locations": [{ "physicalLocation": { "artifactLocation": { "uri": "example-target.py" }, "region": { "startLine": 21, "startColumn": 15 } } }]
         }
       ]
     }
