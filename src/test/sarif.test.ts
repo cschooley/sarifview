@@ -162,4 +162,38 @@ describe('parseSarif', () => {
 
         assert.deepStrictEqual(findings, []);
     });
+
+    it('attaches the rule helpUri when the tool provides one', () => {
+        const findings = parseSarif(sarif([{
+            ruleId: 'documented-rule',
+            message: { text: 'msg' },
+            ...location('src/app.py'),
+        }], {
+            tool: {
+                driver: {
+                    name: 'testtool',
+                    rules: [{ id: 'documented-rule', helpUri: 'https://example.com/rules/documented-rule' }],
+                },
+            },
+        }), WORKSPACE);
+
+        assert.strictEqual(findings[0].helpUri, 'https://example.com/rules/documented-rule');
+    });
+
+    it('leaves helpUri undefined when the rule has none or is unknown', () => {
+        const findings = parseSarif(sarif([
+            { ruleId: 'undocumented-rule', message: { text: 'a' }, ...location('a.py') },
+            { ruleId: 'unknown-rule', message: { text: 'b' }, ...location('b.py') },
+        ], {
+            tool: {
+                driver: {
+                    name: 'testtool',
+                    rules: [{ id: 'undocumented-rule' }],
+                },
+            },
+        }), WORKSPACE);
+
+        assert.strictEqual(findings[0].helpUri, undefined);
+        assert.strictEqual(findings[1].helpUri, undefined);
+    });
 });

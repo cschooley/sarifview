@@ -38,6 +38,9 @@ code --install-extension sarifview-*.vsix
 Suppressed findings (e.g. from `# nosemgrep` inline comments) are automatically
 excluded and do not appear in the Problems panel.
 
+If the scanner included a `helpUri` for a rule, the rule code shown in the
+Problems panel links to that documentation.
+
 ## Configuration
 
 | Setting | Default | Description |

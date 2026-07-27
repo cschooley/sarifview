@@ -6,9 +6,14 @@ interface SarifLog {
 }
 
 interface SarifRun {
-    tool: { driver: { name: string } };
+    tool: { driver: { name: string; rules?: SarifRule[] } };
     results?: SarifResult[];
     originalUriBaseIds?: Record<string, { uri: string }>;
+}
+
+interface SarifRule {
+    id: string;
+    helpUri?: string;
 }
 
 interface SarifResult {
@@ -36,6 +41,8 @@ export type Severity = 'error' | 'warning' | 'note' | 'none';
 export interface Finding {
     tool: string;
     ruleId: string | undefined;
+    /** Link to the rule's documentation, if the tool provided one */
+    helpUri: string | undefined;
     message: string;
     severity: Severity;
     /** Absolute file:// URI */
@@ -72,6 +79,10 @@ export function parseSarif(content: string, workspaceRoot: string): Finding[] {
 
     for (const run of log.runs ?? []) {
         const tool = run.tool?.driver?.name ?? 'unknown';
+        const helpUris = new Map<string, string>();
+        for (const rule of run.tool?.driver?.rules ?? []) {
+            if (rule.helpUri) helpUris.set(rule.id, rule.helpUri);
+        }
 
         for (const result of run.results ?? []) {
             if (result.suppressions?.length) continue;
@@ -94,6 +105,7 @@ export function parseSarif(content: string, workspaceRoot: string): Finding[] {
             findings.push({
                 tool,
                 ruleId: result.ruleId,
+                helpUri: result.ruleId ? helpUris.get(result.ruleId) : undefined,
                 message: result.message.text,
                 severity: normalizeSeverity(result.level),
                 uri,
