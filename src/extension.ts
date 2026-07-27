@@ -76,7 +76,9 @@ function loadAll(collection: vscode.DiagnosticCollection): void {
             );
             const diag = new vscode.Diagnostic(range, finding.message, SEVERITY_MAP[finding.severity]);
             diag.source = finding.tool;
-            diag.code = finding.ruleId;
+            diag.code = finding.ruleId && finding.helpUri
+                ? { value: finding.ruleId, target: vscode.Uri.parse(finding.helpUri) }
+                : finding.ruleId;
 
             const list = byUri.get(finding.uri) ?? [];
             list.push(diag);

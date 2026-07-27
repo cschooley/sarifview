@@ -3,7 +3,14 @@
   "version": "2.1.0",
   "runs": [
     {
-      "tool": { "driver": { "name": "semgrep" } },
+      "tool": {
+        "driver": {
+          "name": "semgrep",
+          "rules": [
+            { "id": "sarifview.example.jwt-example", "helpUri": "https://example.com/sarifview-sample-rules/jwt-example" }
+          ]
+        }
+      },
       "results": [
         {
           "ruleId": "sarifview.example.jwt-example",
